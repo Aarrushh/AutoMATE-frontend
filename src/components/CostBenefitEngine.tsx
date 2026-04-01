@@ -147,7 +147,7 @@ export default function CostBenefitEngine() {
                       >
                         Hours of manual work per week
                       </label>
-                      <span className="text-sm font-mono text-electric-400">
+                      <span className="text-sm font-mono text-electric-400" aria-hidden="true">
                         {hoursPerWeek}h
                       </span>
                     </div>
@@ -157,13 +157,14 @@ export default function CostBenefitEngine() {
                       min={5}
                       max={60}
                       value={hoursPerWeek}
+                      aria-valuetext={`${hoursPerWeek} hours`}
                       onChange={(e) => {
                         setHoursPerWeek(Number(e.target.value));
                         setShowResults(false);
                       }}
-                      className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-navy-600 accent-electric-500"
+                      className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-navy-600 accent-electric-500 focus-visible:ring-2 focus-visible:ring-electric-500 focus-visible:outline-none"
                     />
-                    <div className="flex justify-between text-xs text-slate-600 mt-1">
+                    <div className="flex justify-between text-xs text-slate-600 mt-1" aria-hidden="true">
                       <span>5h</span>
                       <span>60h</span>
                     </div>
@@ -178,7 +179,7 @@ export default function CostBenefitEngine() {
                       >
                         Average hourly wage
                       </label>
-                      <span className="text-sm font-mono text-electric-400">
+                      <span className="text-sm font-mono text-electric-400" aria-hidden="true">
                         ${hourlyWage}
                       </span>
                     </div>
@@ -189,13 +190,14 @@ export default function CostBenefitEngine() {
                       max={100}
                       step={5}
                       value={hourlyWage}
+                      aria-valuetext={`$${hourlyWage}`}
                       onChange={(e) => {
                         setHourlyWage(Number(e.target.value));
                         setShowResults(false);
                       }}
-                      className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-navy-600 accent-electric-500"
+                      className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-navy-600 accent-electric-500 focus-visible:ring-2 focus-visible:ring-electric-500 focus-visible:outline-none"
                     />
-                    <div className="flex justify-between text-xs text-slate-600 mt-1">
+                    <div className="flex justify-between text-xs text-slate-600 mt-1" aria-hidden="true">
                       <span>$10</span>
                       <span>$100</span>
                     </div>
@@ -210,7 +212,7 @@ export default function CostBenefitEngine() {
                       >
                         Employees doing this work
                       </label>
-                      <span className="text-sm font-mono text-electric-400">
+                      <span className="text-sm font-mono text-electric-400" aria-hidden="true">
                         {numEmployees}
                       </span>
                     </div>
@@ -220,13 +222,14 @@ export default function CostBenefitEngine() {
                       min={1}
                       max={20}
                       value={numEmployees}
+                      aria-valuetext={`${numEmployees} employee${numEmployees !== 1 ? 's' : ''}`}
                       onChange={(e) => {
                         setNumEmployees(Number(e.target.value));
                         setShowResults(false);
                       }}
-                      className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-navy-600 accent-electric-500"
+                      className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-navy-600 accent-electric-500 focus-visible:ring-2 focus-visible:ring-electric-500 focus-visible:outline-none"
                     />
-                    <div className="flex justify-between text-xs text-slate-600 mt-1">
+                    <div className="flex justify-between text-xs text-slate-600 mt-1" aria-hidden="true">
                       <span>1</span>
                       <span>20</span>
                     </div>

@@ -1,0 +1,3 @@
+## 2024-05-18 - Improve range input accessibility
+**Learning:** Range inputs with visual min/max/current value labels often create a poor screen reader experience because the numbers are read twice and raw values lack context (e.g. "20" vs "20 hours").
+**Action:** When using range inputs with visual value labels, add `aria-valuetext` to the input to provide units, and add `aria-hidden="true"` to the redundant visual value labels to prevent double-reading. Always include `focus-visible` styles for keyboard navigation of custom-styled range inputs.
