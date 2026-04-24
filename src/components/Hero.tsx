@@ -1,9 +1,11 @@
+'use client';
+
 import { ShieldCheck, ArrowRight, Download } from 'lucide-react';
 
 export default function Hero() {
   return (
     <section
-      id="download"
+      id="hero"
       style={{
         background: 'var(--background)',
         padding: 'var(--space-20) var(--space-6)',
@@ -34,7 +36,7 @@ export default function Hero() {
               margin: 0,
             }}
           >
-            Free &middot; Local &middot; Private
+            FREE &middot; LOCAL &middot; PRIVATE
           </p>
 
           {/* Headline */}

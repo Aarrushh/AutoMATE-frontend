@@ -1,4 +1,6 @@
-import { Check } from 'lucide-react';
+'use client';
+
+import { CheckCircle } from 'lucide-react';
 
 const tiers = [
   {
@@ -48,6 +50,7 @@ const tiers = [
 export default function Pricing() {
   return (
     <section
+      id="pricing"
       style={{
         background: 'var(--color-surface)',
         padding: 'var(--space-20) var(--space-6)',
@@ -65,7 +68,7 @@ export default function Pricing() {
             margin: '0 0 var(--space-3)',
           }}
         >
-          Pricing
+          PRICING
         </p>
         <h2
           style={{
@@ -74,6 +77,7 @@ export default function Pricing() {
             fontWeight: 700,
             color: 'var(--color-text)',
             margin: '0 0 var(--space-12)',
+            textAlign: 'left',
           }}
         >
           Simple, transparent pricing.
@@ -85,7 +89,7 @@ export default function Pricing() {
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: 'var(--space-6)',
-            alignItems: 'start',
+            alignItems: 'stretch',
           }}
         >
           {tiers.map((t, i) => (
@@ -101,6 +105,7 @@ export default function Pricing() {
                 flexDirection: 'column',
                 gap: 'var(--space-5)',
               }}
+              className="pricing-card"
             >
               <div>
                 <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-text-faint)', margin: '0 0 var(--space-2)' }}>
@@ -123,7 +128,7 @@ export default function Pricing() {
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {t.features.map((f, j) => (
                   <li key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-text)', lineHeight: 1.5 }}>
-                    <Check size={14} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '2px' }} aria-hidden="true" />
+                    <CheckCircle size={14} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '2px' }} aria-hidden="true" />
                     {f}
                   </li>
                 ))}
@@ -176,6 +181,7 @@ export default function Pricing() {
         @media (max-width: 768px) {
           .pricing-grid {
             grid-template-columns: 1fr !important;
+            gap: var(--space-8) !important;
           }
         }
       `}</style>

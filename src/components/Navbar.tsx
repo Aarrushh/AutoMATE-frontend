@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Sun, Moon, Download, Menu, X } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -10,7 +11,10 @@ export default function Navbar() {
 
   useEffect(() => {
     const stored = localStorage.getItem('theme');
-    setIsDark(stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches));
+    const theme = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if (theme) {
+      setTimeout(() => setIsDark(true), 0);
+    }
 
     const handleScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -49,23 +53,32 @@ export default function Navbar() {
         aria-label="Main navigation"
       >
         {/* Logo */}
-        <a
+        <Link
           href="/"
           style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}
           aria-label="AutoMATE home"
         >
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-            <circle cx="8" cy="14" r="6" stroke="#01696F" strokeWidth="2" fill="none" />
-            <circle cx="20" cy="14" r="6" stroke="#01696F" strokeWidth="2" fill="none" />
-            <line x1="11" y1="14" x2="17" y2="14" stroke="#01696F" strokeWidth="2" />
-            <circle cx="8" cy="14" r="2" fill="#01696F" />
-            <circle cx="20" cy="14" r="2" fill="#01696F" />
+            <path
+              d="M10 4L15 7V13L10 16L5 13V7L10 4Z"
+              stroke="#01696F"
+              strokeWidth="1.5"
+              fill="none"
+              opacity="0.8"
+            />
+            <path
+              d="M18 12L23 15V21L18 24L13 21V15L18 12Z"
+              stroke="#01696F"
+              strokeWidth="1.5"
+              fill="none"
+            />
+            <line x1="10" y1="10" x2="18" y2="18" stroke="#01696F" strokeWidth="1.5" />
           </svg>
           <span style={{ fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '15px' }}>
             <span style={{ color: 'var(--color-text)' }}>AUTO</span>
             <span style={{ color: 'var(--color-primary)' }}>MATE</span>
           </span>
-        </a>
+        </Link>
 
         {/* Desktop nav */}
         <div

@@ -1,3 +1,5 @@
+'use client';
+
 import { Check } from 'lucide-react';
 
 const benefits = [
@@ -48,7 +50,7 @@ export default function ForSMBs() {
               margin: '0 0 var(--space-3)',
             }}
           >
-            For SMBs &amp; Teams
+            FOR SMBS & TEAMS
           </p>
           <h2
             style={{
@@ -58,6 +60,7 @@ export default function ForSMBs() {
               color: 'var(--color-text)',
               margin: '0 0 var(--space-8)',
               lineHeight: 1.2,
+              textAlign: 'left',
             }}
           >
             Know exactly what’s worth automating.
@@ -97,6 +100,7 @@ export default function ForSMBs() {
             boxShadow: 'var(--shadow-md)',
             padding: '24px',
           }}
+          className="proposal-card"
         >
           <p
             style={{
@@ -109,7 +113,7 @@ export default function ForSMBs() {
               margin: '0 0 var(--space-2)',
             }}
           >
-            Automation Proposal #3
+            AUTOMATION PROPOSAL #3
           </p>
           <h3
             style={{
@@ -178,6 +182,9 @@ export default function ForSMBs() {
         @media (max-width: 768px) {
           .smbs-grid {
             grid-template-columns: 1fr !important;
+          }
+          .proposal-card {
+            margin-top: var(--space-8);
           }
         }
       `}</style>

@@ -1,3 +1,5 @@
+'use client';
+
 import { ArrowRight } from 'lucide-react';
 
 const stats = [
@@ -27,7 +29,7 @@ export default function ForFreelancers() {
             margin: '0 0 var(--space-3)',
           }}
         >
-          For Freelancers
+          FOR FREELANCERS
         </p>
 
         <h2
@@ -39,6 +41,7 @@ export default function ForFreelancers() {
             margin: '0 0 var(--space-4)',
             lineHeight: 1.2,
             maxWidth: '24ch',
+            textAlign: 'left',
           }}
         >
           Get pre-scoped automation jobs. No proposals, no guessing.
@@ -52,6 +55,7 @@ export default function ForFreelancers() {
             maxWidth: '58ch',
             lineHeight: 1.6,
             margin: '0 0 var(--space-12)',
+            textAlign: 'left',
           }}
         >
           AutoMATE clients come with blueprints — trigger, steps, tools, test criteria, and budget. Just accept and build.
@@ -81,6 +85,7 @@ export default function ForFreelancers() {
                 flexDirection: 'column',
                 gap: 'var(--space-1)',
               }}
+              className="stat-item"
             >
               <span
                 style={{
@@ -128,6 +133,7 @@ export default function ForFreelancers() {
           }}
           onMouseEnter={e => (e.currentTarget.style.background = 'var(--color-primary-highlight)')}
           onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+          className="freelancer-cta"
         >
           Join freelancer beta <ArrowRight size={16} aria-hidden="true" />
         </a>
@@ -139,12 +145,16 @@ export default function ForFreelancers() {
             flex-direction: column !important;
             border-radius: var(--radius-lg) !important;
           }
-          .stats-row > div {
+          .stat-item {
             border-right: none !important;
             border-bottom: 1px solid var(--color-divider) !important;
           }
-          .stats-row > div:last-child {
+          .stat-item:last-child {
             border-bottom: none !important;
+          }
+          .freelancer-cta {
+            width: 100%;
+            justify-content: center;
           }
         }
       `}</style>
