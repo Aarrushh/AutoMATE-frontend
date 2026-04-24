@@ -1,10 +1,11 @@
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import SymbioticWorkflow from "@/components/SymbioticWorkflow";
-import TheBrain from "@/components/TheBrain";
-import CostBenefitEngine from "@/components/CostBenefitEngine";
-import CTASection from "@/components/CTASection";
-import Footer from "@/components/Footer";
+import Navbar from '@/components/Navbar';
+import Hero from '@/components/Hero';
+import HowItWorks from '@/components/HowItWorks';
+import ForSMBs from '@/components/ForSMBs';
+import ForFreelancers from '@/components/ForFreelancers';
+import SocialProof from '@/components/SocialProof';
+import Pricing from '@/components/Pricing';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -12,10 +13,11 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <SymbioticWorkflow />
-        <TheBrain />
-        <CostBenefitEngine />
-        <CTASection />
+        <HowItWorks />
+        <ForSMBs />
+        <ForFreelancers />
+        <SocialProof />
+        <Pricing />
       </main>
       <Footer />
     </>
