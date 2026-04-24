@@ -1,139 +1,227 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-
-const navLinks = [
-  { label: "How It Works", href: "#workflow" },
-  { label: "The Brain", href: "#brain" },
-  { label: "ROI Calculator", href: "#calculator" },
-];
+import { useState, useEffect } from 'react';
+import { Sun, Moon, Download, Menu, X } from 'lucide-react';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const stored = localStorage.getItem('theme');
+    setIsDark(stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches));
+
+    const handleScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const toggleTheme = () => {
+    const next = isDark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    setIsDark(!isDark);
+  };
+
   return (
-    <motion.nav
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-navy-950/80 backdrop-blur-xl border-b border-navy-700/50"
-          : "bg-transparent"
-      }`}
+    <header
+      style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 50,
+        background: 'var(--background)',
+        borderBottom: '1px solid var(--color-border)',
+        boxShadow: scrolled ? 'var(--shadow-sm)' : 'none',
+        transition: 'box-shadow var(--transition-interactive)',
+      }}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2.5 group" id="nav-logo">
-            <div className="relative w-8 h-8 flex items-center justify-center">
-              <div className="absolute inset-0 bg-electric-500/20 rounded-lg group-hover:bg-electric-500/30 transition-colors" />
-              <svg
-                viewBox="0 0 24 24"
-                className="w-5 h-5 text-electric-400"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-              </svg>
-            </div>
-            <span className="text-lg font-semibold tracking-tight text-white">
-              Auto<span className="text-gradient-blue">MATE</span>
-            </span>
+      <nav
+        style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '0 var(--space-6)',
+          height: '64px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+        aria-label="Main navigation"
+      >
+        {/* Logo */}
+        <a
+          href="/"
+          style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}
+          aria-label="AutoMATE home"
+        >
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <circle cx="8" cy="14" r="6" stroke="#01696F" strokeWidth="2" fill="none" />
+            <circle cx="20" cy="14" r="6" stroke="#01696F" strokeWidth="2" fill="none" />
+            <line x1="11" y1="14" x2="17" y2="14" stroke="#01696F" strokeWidth="2" />
+            <circle cx="8" cy="14" r="2" fill="#01696F" />
+            <circle cx="20" cy="14" r="2" fill="#01696F" />
+          </svg>
+          <span style={{ fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '15px' }}>
+            <span style={{ color: 'var(--color-text)' }}>AUTO</span>
+            <span style={{ color: 'var(--color-primary)' }}>MATE</span>
+          </span>
+        </a>
+
+        {/* Desktop nav */}
+        <div
+          style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-8)' }}
+          className="hidden-mobile"
+        >
+          <a
+            href="#smbs"
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: '14px',
+              color: 'var(--color-text-muted)',
+              textDecoration: 'none',
+              transition: 'color var(--transition-interactive)',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-text)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text-muted)')}
+          >
+            For SMBs
+          </a>
+          <a
+            href="#freelancers"
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: '14px',
+              color: 'var(--color-text-muted)',
+              textDecoration: 'none',
+              transition: 'color var(--transition-interactive)',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-text)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text-muted)')}
+          >
+            For Freelancers
           </a>
 
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="px-4 py-2 text-sm text-slate-400 hover:text-white transition-colors rounded-lg hover:bg-white/5"
-                id={`nav-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
+          <button
+            onClick={toggleTheme}
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '6px',
+              color: 'var(--color-text-muted)',
+              display: 'flex',
+              alignItems: 'center',
+              borderRadius: 'var(--radius-sm)',
+              minWidth: '44px',
+              minHeight: '44px',
+              justifyContent: 'center',
+            }}
+          >
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
 
-          {/* CTA */}
-          <div className="hidden md:flex items-center gap-3">
-            <a
-              href="#calculator"
-              className="px-5 py-2.5 text-sm font-medium text-white bg-electric-500 hover:bg-electric-600 rounded-lg transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]"
-              id="nav-cta-calculate"
+          <a
+            href="#download"
+            style={{
+              background: 'var(--color-primary)',
+              color: '#fff',
+              fontFamily: 'var(--font-body)',
+              fontSize: '14px',
+              fontWeight: 600,
+              padding: '8px 16px',
+              borderRadius: 'var(--radius-md)',
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'background var(--transition-interactive)',
+              minHeight: '44px',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.background = 'var(--color-primary-hover)')}
+            onMouseLeave={e => (e.currentTarget.style.background = 'var(--color-primary)')}
+          >
+            <Download size={14} aria-hidden="true" />
+            Download beta
+          </a>
+        </div>
+
+        {/* Mobile toggle */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          className="show-mobile"
+          style={{
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            color: 'var(--color-text)',
+            display: 'none',
+            padding: '6px',
+            minWidth: '44px',
+            minHeight: '44px',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 'var(--radius-sm)',
+          }}
+        >
+          {menuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </nav>
+
+      {/* Mobile dropdown */}
+      {menuOpen && (
+        <div
+          style={{
+            background: 'var(--background)',
+            borderTop: '1px solid var(--color-border)',
+            padding: 'var(--space-4) var(--space-6)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'var(--space-4)',
+          }}
+        >
+          <a
+            href="#smbs"
+            onClick={() => setMenuOpen(false)}
+            style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: 'var(--color-text)', textDecoration: 'none', padding: '10px 0', minHeight: '44px', display: 'flex', alignItems: 'center' }}
+          >
+            For SMBs
+          </a>
+          <a
+            href="#freelancers"
+            onClick={() => setMenuOpen(false)}
+            style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: 'var(--color-text)', textDecoration: 'none', padding: '10px 0', minHeight: '44px', display: 'flex', alignItems: 'center' }}
+          >
+            For Freelancers
+          </a>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: 'var(--space-2)' }}>
+            <button
+              onClick={toggleTheme}
+              aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: '8px', fontFamily: 'var(--font-body)', fontSize: '14px', minHeight: '44px', padding: '0' }}
             >
-              Calculate Savings
+              {isDark ? <Sun size={16} /> : <Moon size={16} />}
+              {isDark ? 'Light mode' : 'Dark mode'}
+            </button>
+            <a
+              href="#download"
+              onClick={() => setMenuOpen(false)}
+              style={{ background: 'var(--color-primary)', color: '#fff', fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 600, padding: '10px 16px', borderRadius: 'var(--radius-md)', textDecoration: 'none', minHeight: '44px', display: 'flex', alignItems: 'center' }}
+            >
+              Download beta
             </a>
           </div>
-
-          {/* Mobile toggle */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 text-slate-400 hover:text-white"
-            id="nav-mobile-toggle"
-            aria-label="Toggle menu"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-            >
-              {mobileOpen ? (
-                <path d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
         </div>
-      </div>
+      )}
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden bg-navy-900/95 backdrop-blur-xl border-b border-navy-700/50"
-          >
-            <div className="px-6 py-4 space-y-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="block px-4 py-3 text-sm text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <div className="pt-3 border-t border-navy-700/50">
-                <a
-                  href="#calculator"
-                  onClick={() => setMobileOpen(false)}
-                  className="block w-full px-4 py-3 text-sm font-medium text-center text-white bg-electric-500 hover:bg-electric-600 rounded-lg transition-colors"
-                >
-                  Calculate Savings
-                </a>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+      <style>{`
+        @media (max-width: 768px) {
+          .hidden-mobile { display: none !important; }
+          .show-mobile { display: flex !important; }
+        }
+      `}</style>
+    </header>
   );
 }
