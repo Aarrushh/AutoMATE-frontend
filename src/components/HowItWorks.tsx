@@ -1,3 +1,5 @@
+'use client';
+
 export default function HowItWorks() {
   const steps = [
     {
@@ -56,6 +58,7 @@ export default function HowItWorks() {
 
   return (
     <section
+      id="how-it-works"
       style={{
         background: 'var(--background)',
         padding: 'var(--space-20) var(--space-6)',
@@ -69,6 +72,7 @@ export default function HowItWorks() {
             fontWeight: 700,
             color: 'var(--color-text)',
             marginBottom: 'var(--space-16)',
+            textAlign: 'left',
           }}
         >
           How AutoMATE works
@@ -86,6 +90,7 @@ export default function HowItWorks() {
               borderLeft: '1.5px dashed var(--color-primary)',
               opacity: 0.3,
             }}
+            className="connector-line"
             aria-hidden="true"
           />
 
@@ -96,7 +101,7 @@ export default function HowItWorks() {
                 className="step-row"
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: step.side === 'right' ? '1fr 1fr' : '1fr 1fr',
+                  gridTemplateColumns: '1fr 1fr',
                   gap: 'var(--space-10)',
                   alignItems: 'center',
                   direction: step.side === 'left' ? 'rtl' : 'ltr',
@@ -104,7 +109,7 @@ export default function HowItWorks() {
               >
                 {/* Text side */}
                 <div style={{ direction: 'ltr', display: 'flex', gap: 'var(--space-6)', alignItems: 'flex-start' }}>
-                  {/* Step number */}
+                  {/* Step number container */}
                   <div style={{ position: 'relative', width: '56px', flexShrink: 0 }}>
                     <span
                       style={{
@@ -161,6 +166,7 @@ export default function HowItWorks() {
                     padding: 'var(--space-6)',
                     border: '1px solid var(--color-border)',
                   }}
+                  className="step-illustration"
                 >
                   {step.illustration}
                 </div>
@@ -175,6 +181,13 @@ export default function HowItWorks() {
           .step-row {
             grid-template-columns: 1fr !important;
             direction: ltr !important;
+            gap: var(--space-6) !important;
+          }
+          .connector-line {
+            display: none !important;
+          }
+          .step-illustration {
+            order: 2;
           }
         }
       `}</style>

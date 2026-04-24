@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={instrumentSerif.variable}>
+    <html lang="en" className={instrumentSerif.variable} data-theme="light">
       <head>
         <link
           href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap"

@@ -1,91 +1,204 @@
+'use client';
+
+import { ShieldCheck } from 'lucide-react';
+import Link from 'next/link';
+
 export default function Footer() {
   return (
-    <footer className="border-t border-navy-700/50 bg-navy-950">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-          {/* Brand */}
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="relative w-7 h-7 flex items-center justify-center">
-                <div className="absolute inset-0 bg-electric-500/20 rounded-lg" />
-                <svg
-                  viewBox="0 0 24 24"
-                  className="w-4 h-4 text-electric-400"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                </svg>
-              </div>
-              <span className="text-base font-semibold tracking-tight text-white">
-                Auto<span className="text-gradient-blue">MATE</span>
-              </span>
-            </div>
-            <p className="text-sm text-slate-500 max-w-sm leading-relaxed">
-              The Consultant Brain that replaces expensive agency discovery
-              phases. AI-powered workflow analysis and automation blueprints at
-              zero cost.
-            </p>
-          </div>
-
-          {/* Links */}
-          <div>
-            <h4 className="text-sm font-semibold text-slate-300 mb-4">
-              Product
-            </h4>
-            <ul className="space-y-2.5">
-              {["How It Works", "The Brain", "ROI Calculator", "Pricing"].map(
-                (link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-sm text-slate-500 hover:text-white transition-colors"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                )
-              )}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-sm font-semibold text-slate-300 mb-4">
-              Company
-            </h4>
-            <ul className="space-y-2.5">
-              {["About", "Blog", "Careers", "Contact"].map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
-                    className="text-sm text-slate-500 hover:text-white transition-colors"
-                  >
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+    <footer
+      style={{
+        background: 'var(--color-surface-offset)',
+        borderTop: '1px solid var(--color-divider)',
+        padding: 'var(--space-16) var(--space-6) var(--space-8)',
+      }}
+    >
+      <div
+        style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: '1.5fr 1fr 1.5fr',
+          gap: 'var(--space-12)',
+        }}
+        className="footer-grid"
+      >
+        {/* Left: Logo + Tagline */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+          <Link
+            href="/"
+            style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}
+            aria-label="AutoMATE home"
+          >
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <path
+                d="M10 4L15 7V13L10 16L5 13V7L10 4Z"
+                stroke="#01696F"
+                strokeWidth="1.5"
+                fill="none"
+                opacity="0.8"
+              />
+              <path
+                d="M18 12L23 15V21L18 24L13 21V15L18 12Z"
+                stroke="#01696F"
+                strokeWidth="1.5"
+                fill="none"
+              />
+              <line x1="10" y1="10" x2="18" y2="18" stroke="#01696F" strokeWidth="1.5" />
+            </svg>
+            <span style={{ fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '15px' }}>
+              <span style={{ color: 'var(--color-text)' }}>AUTO</span>
+              <span style={{ color: 'var(--color-primary)' }}>MATE</span>
+            </span>
+          </Link>
+          <p
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: '14px',
+              color: 'var(--color-text-muted)',
+              lineHeight: 1.6,
+              maxWidth: '30ch',
+            }}
+          >
+            Your local AI workflow architect. Free. Private. Yours.
+          </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-between pt-8 border-t border-navy-700/50 gap-4">
-          <p className="text-xs text-slate-600">
-            © {new Date().getFullYear()} AutoMATE. All rights reserved.
+        {/* Center: Nav links */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+          <a
+            href="#smbs"
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: '14px',
+              color: 'var(--color-text-muted)',
+              textDecoration: 'none',
+              transition: 'color var(--transition-interactive)',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-text)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text-muted)')}
+          >
+            For SMBs
+          </a>
+          <a
+            href="#freelancers"
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: '14px',
+              color: 'var(--color-text-muted)',
+              textDecoration: 'none',
+              transition: 'color var(--transition-interactive)',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-text)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text-muted)')}
+          >
+            For Freelancers
+          </a>
+        </div>
+
+        {/* Right: Waitlist input */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+          <p
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: '14px',
+              fontWeight: 600,
+              color: 'var(--color-text)',
+              margin: 0,
+            }}
+          >
+            Join the waitlist
           </p>
-          <div className="flex items-center gap-6">
-            {["Privacy", "Terms", "Cookies"].map((link) => (
-              <a
-                key={link}
-                href="#"
-                className="text-xs text-slate-600 hover:text-slate-400 transition-colors"
-              >
-                {link}
-              </a>
-            ))}
+          <div style={{ display: 'flex', gap: '8px' }} className="waitlist-form">
+            <input
+              type="email"
+              placeholder="Email address"
+              style={{
+                flex: 1,
+                background: 'var(--color-surface-2)',
+                border: '1px solid var(--color-border)',
+                borderRadius: 'var(--radius-md)',
+                padding: '10px 14px',
+                fontFamily: 'var(--font-body)',
+                fontSize: '14px',
+                color: 'var(--color-text)',
+                outline: 'none',
+                minHeight: '44px',
+              }}
+              onFocus={e => (e.currentTarget.style.borderColor = 'var(--color-primary)')}
+              onBlur={e => (e.currentTarget.style.borderColor = 'var(--color-border)')}
+            />
+            <button
+              style={{
+                background: 'var(--color-primary)',
+                color: '#fff',
+                fontFamily: 'var(--font-body)',
+                fontSize: '13px',
+                fontWeight: 600,
+                padding: '10px 20px',
+                borderRadius: 'var(--radius-md)',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'background var(--transition-interactive)',
+                minHeight: '44px',
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = 'var(--color-primary-hover)')}
+              onMouseLeave={e => (e.currentTarget.style.background = 'var(--color-primary)')}
+            >
+              Join waitlist
+            </button>
           </div>
+          <p
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontFamily: 'var(--font-body)',
+              fontSize: '12px',
+              color: 'var(--color-text-faint)',
+              margin: 0,
+            }}
+          >
+            <ShieldCheck size={12} aria-hidden="true" />
+            AutoMATE never uploads your files or workflow data. Ever.
+          </p>
         </div>
       </div>
+
+      {/* Bottom bar */}
+      <div
+        style={{
+          maxWidth: '1200px',
+          margin: 'var(--space-12) auto 0',
+          paddingTop: 'var(--space-8)',
+          borderTop: '1px solid var(--color-divider)',
+        }}
+      >
+        <p
+          style={{
+            fontFamily: 'var(--font-body)',
+            fontSize: '12px',
+            color: 'var(--color-text-faint)',
+            margin: 0,
+          }}
+        >
+          &copy; {new Date().getFullYear()} AutoMATE. Built for SMBs, by people who hate bloated software.
+        </p>
+      </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .footer-grid {
+            grid-template-columns: 1fr !important;
+            gap: var(--space-10) !important;
+          }
+          .waitlist-form {
+            flex-direction: column !important;
+          }
+          .waitlist-form input, .waitlist-form button {
+            width: 100% !important;
+          }
+        }
+      `}</style>
     </footer>
   );
 }

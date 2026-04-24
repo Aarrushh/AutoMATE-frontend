@@ -1,3 +1,5 @@
+'use client';
+
 const quotes = [
   '“I spend 3 hours a week manually copying data between tools. I know there’s a fix but I have no idea where to start.”',
   '“Every agency wants a $5k discovery call before telling me what automation I actually need.”',
@@ -8,6 +10,7 @@ const quotes = [
 export default function SocialProof() {
   return (
     <section
+      id="social-proof"
       style={{
         background: 'var(--background)',
         padding: 'var(--space-20) var(--space-6)',
@@ -25,7 +28,7 @@ export default function SocialProof() {
             margin: '0 0 var(--space-3)',
           }}
         >
-          Early Feedback
+          EARLY FEEDBACK
         </p>
 
         <h2
@@ -35,6 +38,7 @@ export default function SocialProof() {
             fontWeight: 700,
             color: 'var(--color-text)',
             margin: '0 0 var(--space-10)',
+            textAlign: 'left',
           }}
         >
           What early users say.
@@ -101,6 +105,7 @@ export default function SocialProof() {
             fontSize: '12px',
             color: 'var(--color-text-faint)',
             margin: 0,
+            textAlign: 'left',
           }}
         >
           Paraphrased from early user interviews, April 2026
